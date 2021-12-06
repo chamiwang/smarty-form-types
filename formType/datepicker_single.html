@@ -1,0 +1,29 @@
+<!--bootstrap-datepicker-->
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} {*if $row*}row{*/if*}">
+    <label class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}</label>
+    <div class="{*if $row*}{*$row[2]*}{*/if*}">
+        <input id="input-date-{*$name*}" name="{*$name*}" type="text" class="form-control" value="{*$value*}"
+               {*if $required == true*}data-required ="true" {*/if*}
+        data-describedby="{*$name*}-error"
+        {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}
+        >
+        <div id="{*$name*}-error" class="invalid-feedback" >
+
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function(){
+        $('#input-date-{*$name*}').datepicker({
+            readOnly: true,
+            clearData: true,
+            format: '{*if $format*}{*$format*}{*else*}yyyy-mm-dd{*/if*}',
+        {*if $startDate*}startDate: '{*$startDate*}',{*/if*}
+            language:'zh-CN',
+        {*if $value*}defaultViewDate:'{*$value*}',{*/if*}
+            {*if $minViewMode*}minViewMode:'{*$minViewMode*}',{*/if*}
+        });
+    });
+
+</script>

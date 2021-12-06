@@ -1,0 +1,19 @@
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} {*if $row*}row{*/if*}">
+    <label for="multiple-label-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*}  col-form-label">{*$title*}</label>
+    <div class="{*if $row*}{*$row[2]*}{*/if*}">
+        <select name="{*$name*}[]" data-placeholder="{*$placeholder*}" multiple class="chosen-select col-12" tabindex="18" id="multiple-label-{*$name*}"
+                {*if $required == true*}data-required ="true" {*/if*}
+                data-describedby="{*$name*}-error"
+                {*if $c_type *}data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}
+        >
+            {*foreach from=$list item=item key=key*}
+            <option value="{*if $valueIsKey*}{*$item*}{*else*}{*$key*}{*/if*}"
+                    {*if $valueIsKey*}{*if isset($value) && in_array($item , $value)*}selected{*/if*}{*else*}{*if isset($value) && in_array($key , $value)*}selected{*/if*}{*/if*}
+                    >{*$item*}</option>
+            {*/foreach*}
+        </select>
+        <div id="{*$name*}-error" class="invalid-feedback" >
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{*extends file="com/paper/formType/text.html"*}
+{*block name=connect*}
+<div class="col-2 {*$row[3]*}"><img src="/com/auth/creImage" width="65" height="27" id="ImageID" onclick='changeImage();'>
+
+</div>
+<div class="col-3 {*$row[3]*}">
+    <a href="javascript:void(0);" onclick="changeImage();">换一张</a>
+</div>
+<script>
+
+    //更换验证码
+    function changeImage()
+    {
+        let randNumber = Math.random();
+        $("#ImageID").attr("src","/com/auth/creImage?"+randNumber);
+    }
+
+</script>
+{*/block*}
+

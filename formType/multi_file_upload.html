@@ -1,0 +1,216 @@
+<!--jQuery Ajax File Uploader Widget-->
+<div class="col-12" >
+    <div class="row pb-5">
+        <div class="col-md-6 col-sm-12">
+            <label for="drag-and-drop-zone-{*$name*}" class="col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+            <div id="{*$name*}-error" class="invalid-feedback" >
+                    该项目不能为空
+            </div>
+            <div id="drag-and-drop-zone-{*$name*}" class="dm-uploader text-center">
+                <!--                <div id="drag-and-drop-zone-2" class="dm-uploader p-5 text-center">-->
+                <!--<h3 class="mb-5 mt-5 text-muted">Drag &amp; drop Files here</h3>-->
+                <h3 class="mb-3 mt-3 text-muted">点击上传按钮，或将文件拖至此处</h3>
+                <div class="btn btn-primary btn-block">
+                    <!--<div class="btn btn-primary btn-block mb-5">-->
+                    <span>上传</span>
+                    <input type="file" title="点击添加文件" multiple="">
+                </div>
+            </div><!-- /uploader -->
+
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <label class="col-form-label">&nbsp</label>
+            <!--            <div class="card h-100">-->
+            <div class="card">
+                <div class="card-header">
+                    上传进度
+                </div>
+
+                <ul class="list-unstyled p-2 d-flex flex-column col" id="files-{*$name*}">
+                    <li class="text-muted text-center empty">未上传任何文件</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="files-template-{*$name*}">
+        <li class="media">
+
+            <div class="media-body mb-1">
+                <p class="mb-2">
+
+                    <a href="%%href%%">%%filename%%</a>
+
+                     - 状态: <span class="text-muted">等待中</span>
+                    <span class="float-right file-remove" onclick="uploader_remove_item_{*$name*}(this)">x</span>
+                </p>
+                <div class="progress mb-2">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                         role="progressbar"
+                         style="width: 0%"
+                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+
+                <hr class="mt-1 mb-1" />
+            </div>
+        </li>
+    </script>
+
+</div>
+
+<script>
+    let uploader_count_{*$name*} = 0;
+    let uploader_count_max_{*$name*} = {*$maxFile*};
+    function uploader_remove_item_{*$name*}(self) {
+        $(self).closest('.media').remove();
+        uploader_count_{*$name*}-=1;
+    }
+
+
+    $(function(){
+
+        //mutiple
+        // Creates a new file and add it to our list
+        function ui_multi_add_file_{*$name*}(id, file, href='#')
+        {
+            var template = $('#files-template-{*$name*}').text();
+            template = template.replace('%%filename%%', file.name);
+            template = template.replace('%%href%%', href);
+            template = $(template);
+            template.prop('id', 'uploaderFile' + id + "{*$name*}");
+            template.data('file-id', id);
+
+            $('#files-{*$name*}').find('li.empty').fadeOut(); // remove the 'no files yet'
+            $('#files-{*$name*}').prepend(template);
+        }
+
+// Changes the status messages on our list
+        function ui_multi_update_file_status_{*$name*}(id, status, message)
+        {
+            $('#uploaderFile' + id + "{*$name*}").find('span').first().html(message).prop('class', 'status text-' + status);
+        }
+
+// Updates a file progress, depending on the parameters it may animate it or change the color.
+        function ui_multi_update_file_progress_{*$name*}(id, percent, color, active)
+        {
+            color = (typeof color === 'undefined' ? false : color);
+            active = (typeof active === 'undefined' ? true : active);
+
+            var bar = $('#uploaderFile' + id +"{*$name*}").find('div.progress-bar');
+
+            bar.width(percent + '%').attr('aria-valuenow', percent);
+            bar.toggleClass('progress-bar-striped progress-bar-animated', active);
+
+            if (percent === 0){
+                bar.html('');
+            } else {
+                bar.html(percent + '%');
+            }
+
+            if (color !== false){
+                bar.removeClass('bg-success bg-info bg-warning bg-danger');
+                bar.addClass('bg-' + color);
+            }
+        }
+        function ui_add_log_{*$name*}(msg){
+            console.log(msg);
+        }
+// Toggles the disabled status of Star/Cancel buttons on one particual file
+        function ui_multi_update_file_controls_{*$name*}(id, start, cancel, wasError)
+        {
+            wasError = (typeof wasError === 'undefined' ? false : wasError);
+
+            $('#uploaderFile' + id).find('button.start').prop('disabled', !start);
+            $('#uploaderFile' + id).find('button.cancel').prop('disabled', !cancel);
+
+            if (!start && !cancel) {
+                $('#uploaderFile' + id).find('.controls').fadeOut();
+            } else {
+                $('#uploaderFile' + id).find('.controls').fadeIn();
+            }
+
+            if (wasError) {
+                $('#uploaderFile' + id).find('button.start').html('Retry');
+            }
+        }
+
+
+
+        $(function(){
+            /*
+             * For the sake keeping the code clean and the examples simple this file
+             * contains only the plugin configuration & callbacks.
+             *
+             * UI functions ui_* can be located in:
+             *   - assets/demo/uploader/js/ui-main.js
+             *   - assets/demo/uploader/js/ui-multiple.js
+             *   - assets/demo/uploader/js/ui-single.js
+             */
+            $('#drag-and-drop-zone-{*$name*}').dmUploader({ //
+                url: '{*$url*}',
+                maxFileSize: {*$maxFileSize*}, // Megs
+                fieldName:'{*$fieldName*}',
+                extFilter: {*$extFilter*},
+                onDragEnter: function(){
+                    // Happens when dragging something over the DnD area
+                    this.addClass('active');
+                },
+                onDragLeave: function(){
+                    // Happens when dragging something OUT of the DnD area
+                    this.removeClass('active');
+                },
+                onInit: function(){
+
+                },
+                onComplete: function(){
+                    uploader_count_{*$name*}=$('#files-{*$name*}').find('.media').length;
+                    console.log(uploader_count_{*$name*})
+                },
+                onNewFile: function(id, file){
+                    if(uploader_count_{*$name*} >= uploader_count_max_{*$name*}){
+                        ui_add_log_{*$name*}('上传文件数量已达上限');
+                        return;
+                    }
+
+                    ui_multi_add_file_{*$name*}(id, file);
+                },
+                onBeforeUpload: function(id){
+                    ui_multi_update_file_progress_{*$name*}(id, 0, '', true);
+                    ui_multi_update_file_status_{*$name*}(id, 'uploading', '上传中...');
+                },
+                onUploadProgress: function(id, percent){
+                    // Updating file progress
+                    ui_multi_update_file_progress_{*$name*}(id, percent);
+                },
+                onUploadSuccess: function(id, data){
+                    /*                    console.log(JSON.parse(data));*/
+                    data = JSON.parse(data);
+                    $('#uploaderFile'+id+"{*$name*}").append(`<input type="hidden" name="{*$name*}[]" value='${JSON.stringify(data.data)}'>`)
+                    ui_multi_update_file_status_{*$name*}(id, 'success', '上传成功');
+                    ui_multi_update_file_progress_{*$name*}(id, 100, 'success', false);
+                },
+                onUploadError: function(id, xhr, status, message){
+                    // Happens when an upload error happens
+                    ui_multi_update_file_status_{*$name*}(id, 'danger', '传输错误，请检查该文件内容');
+                    ui_multi_update_file_progress_{*$name*}(id, 0, 'danger', false);
+                },
+                onFallbackMode: function(){
+                    // When the browser doesn't support this plugin :(
+                    ui_add_log_{*$name*}('您使用的浏览器存在安全隐患，为了您的文件安全，请更换浏览器', 'danger');
+                },
+                onFileSizeError: function(file){
+                    ui_add_log_{*$name*}('文件 \'' + file.name + '\' 大小超过了上传标准', 'danger');
+                },
+                onFileExtError:function(file){
+                    ui_add_log_{*$name*}('文件 \'' + file.name+"的文件类型不被支持");
+                }
+            });
+            {*foreach from=$value item=item key=key*}
+
+            ui_multi_add_file_{*$name*}({*$item->id*}, {'name':'{*$item->file_name*}'},'{*$item->href*}');
+            setTimeout(function(){                    ui_multi_update_file_status_{*$name*}({*$item->id*}, 'success', '已上传');
+                ui_multi_update_file_progress_{*$name*}({*$item->id*}, 100, 'success', false);            $('#uploaderFile'+{*$item->id*}+"{*$name*}").append(`<input type="hidden" name="{*$name*}_ids[]" value='{*$item->id*}'>`);}, 100);
+            {*/foreach*}
+        });
+    });
+</script>

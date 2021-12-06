@@ -1,0 +1,17 @@
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-sm-12 col-md-4{*/if*} {*if $row*}row{*/if*}">
+    <label for="input-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+    <div class="{*if $row*}{*$row[2]*}{*/if*}">
+
+        <input {*if $disabled *}{*else*}name="{*$name*}" id="input-{*$name*}"{*/if*} type="{*block name=type*}text{*/block*}" class="form-control" value="{*$value*}"
+               {*if $required == true*}data-required ="true" {*/if*}
+                {*if $disabled *}disabled {*/if*}
+        {*if $name *}data-describedby="{*$name*}-error"{*/if*}
+        {*if $c_type && !$disabled *}data-validate="{*$c_type*}" data-description="{*$c_type*}" {*else*}{*if $name *}data-description="default"{*/if*}{*/if*}
+        placeholder='{*$placeholder*}'
+        >
+        <div id="{*$name*}-error" class="invalid-feedback" >
+
+        </div>
+    </div>
+{*block name=connect*}{*/block*}
+</div>

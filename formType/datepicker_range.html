@@ -1,0 +1,69 @@
+<!--bootstrap-datepicker-->
+{*if $vertical*}
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*}">
+    <label class="col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+    <div class="input-group input-daterange-{*$name1*}">
+        <input name="{*$name1*}" type="text" class="form-control" value="{*$value1*}"
+               {*if $required *} data-required ="true" {*/if*}
+        data-describedby="{*$name1*}-error"
+        {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
+        >
+        <!--        <div id="{*$name1*}-error" class="invalid-feedback" >
+
+                </div>-->
+
+
+        <!--        <div id="{*$name2*}-error" class="invalid-feedback" >
+
+                </div>-->
+    </div>
+    <div class="input-group-addon align-text-bottom p-2">到</div>
+    <div class="input-group input-daterange-{*$name1*}">
+        <input name="{*$name2*}" type="text" class="form-control" value="{*$value2*}"
+               {*if $required2 *} data-required ="true" {*/if*}
+        data-describedby="{*$name2*}-error"
+        {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
+        >
+    </div>
+
+</div>
+{*else*}
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*}">
+    <label class="col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+    <div class="input-group input-daterange-{*$name1*}">
+        <input name="{*$name1*}" type="text" class="form-control" value="{*$value1*}"
+               {*if $required *} data-required ="true" {*/if*}
+        data-describedby="{*$name1*}-error"
+        {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
+        >
+        <!--        <div id="{*$name1*}-error" class="invalid-feedback" >
+
+                </div>-->
+        <div class="input-group-addon p-2">到</div>
+
+        <input name="{*$name2*}" type="text" class="form-control" value="{*$value2*}"
+               {*if $required2 *} data-required ="true" {*/if*}
+        data-describedby="{*$name2*}-error"
+        {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
+        >
+        <!--        <div id="{*$name2*}-error" class="invalid-feedback" >
+
+                </div>-->
+    </div>
+</div>
+{*/if*}
+<script>
+    $(document).ready(function(){
+        $('.input-daterange-{*$name1*} input').each(function() {
+            /*        $(this).datepicker('clearDates');*/
+            $(this).datepicker({
+                readOnly: true,
+                clearData: true,
+                format: 'yyyy-mm-dd',
+            {*if $startDate*}startDate: '{*$startDate*}',{*/if*}
+                language:'zh-CN',
+            });
+        });
+    });
+
+</script>

@@ -1,0 +1,327 @@
+<!--jQuery Ajax File Uploader Widget-->
+<div class="{*if $classes*}{*$classes[1]*}{*else*}col-sm-12 col-md-4{*/if*}" >
+    <div class="row pb-5">
+        <div class="col-md-12 col-sm-12">
+            <label for="drag-and-drop-zone-{*$name*}" class="col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+            <div id="{*$name*}-error" class="invalid-feedback" >
+                    该项目不能为空
+            </div>
+            <div id="drag-and-drop-zone-{*$name*}" class="dm-uploader text-center">
+                <!--                <div id="drag-and-drop-zone-2" class="dm-uploader p-5 text-center">-->
+                <!--<h3 class="mb-5 mt-5 text-muted">Drag &amp; drop Files here</h3>-->
+                <div class="jx-upload-box d-grid gap-2 col-8 mx-auto " id="files-{*$name*}">
+                    <div class="pt-2">
+                        <div class="none-file">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+                                <defs>
+                                    <style>
+                                        .cls-1 {
+                                            opacity: 0.6;
+                                        }
+                                    </style>
+                                </defs>
+                                <image id="矢量智能对象" class="cls-1" x="0" y="0" width="50" height="50" xlink:href="data:img/png;base64,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"/>
+                            </svg>
+                            <div class="d-grid gap-2 mx-auto pl-3 pr-3 pb-1">
+                                <div class="mb-3 mt-3 text-muted">点击上传按钮进行上传或将文件拖至此处上传</div>
+                            </div>
+                        </div>
+                        <div class="with-file">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto pt-2">
+                    <div class="jx-btn-m btn btn-primary btn-block">
+                        <!--<div class="btn btn-primary btn-block mb-5">-->
+                        <span>上&nbsp;&nbsp;传</span>
+                        <input type="file" title="点击添加文件" multiple="">
+                    </div>
+                </div>
+
+            </div><!-- /uploader -->
+
+        </div>
+
+    </div>
+    <script type="text/html" id="files-template-{*$name*}">
+        <li class="media pb-2">
+
+            <div class="media-body mb-1">
+
+                <div class="mb-2 d-flex flex-row p-1">
+                    <div class="svg-box pt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 500 500">
+                            <image id="矢量智能对象" x="73" y="45" width="374" height="411" xlink:href="data:img/png;base64,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"/>
+                            <image id="矢量智能对象-2" data-name="矢量智能对象" x="332" y="45" width="112" height="112" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAMAAADxPgR5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhFBMVEVyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMxyfMwAAACE9mlNAAAAKnRSTlMAlwGNiO3bxKSCVSfvtXIq2inHXAblcAnnagTVQJ4P4D39dqoKFRzcnSimpNdGAAAAAWJLR0QrJLnkCAAAAAlwSFlzAAALiAAAC4gB5Y4pSQAAAAd0SU1FB+ULHhA1JM9ftDsAAAGSSURBVGjevdgLVoIxDIRR/EV5KCiCIIiICD5m/wvUFdC0Gb5u4J6etukkvauuxy7RomhRtChaFC2KFkWLokXRomhRtChaFC2KFkWLokXRomhRtChaFC2KFkWLokXRomhRtChaFC2KFkWLosUSaBeLoFssg2YxAHrFCGgVQ6BTjIG6pkH1adAmhkGXGAdNYgXoEWtAi1gFOsQ60CBWgnmxFkyL1WBWrAeTYgOYE1vAlNgEZsQ2MCE2gu1iK9gsNoOtYjvYKCbANjEDNokpsEXMgQ1iEqwXs2C1mAZrxTxYKRrAOvGGFm8dYI04sIAV4tADxsWRCQyLYxcYFe9sYFDs7mlx4gNj4tQIhsQHJxgSH2mxbwUD4swLBsQnWpybwaK4eKbFpRssiasXWlzbwYK4eaXFrR8siG+0uHunxf0HLR4uAJ4Vu09aPLqLeFE8XeA1nhe/vnER3+MJP8cjfle7A14B9niV2/3QYm+L/4+bNZ46Vks8yy3meELuzfqeqUpc/O/mphO8R+5+x6Ph4NYzs/oDbcK1kND0IksAAAAASUVORK5CYII="/>
+                            <image id="矢量智能对象-3" data-name="矢量智能对象" x="163" y="180" width="187" height="142" xlink:href="data:img/png;base64,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"/>
+                        </svg>
+                    </div>
+                    <div class="flex-fill pr-1 pt-2">
+                        <div class="d-flex flex-row">
+                            <span class="text-muted flex-fill">上传中</span>
+                            <span class="file-remove pr-2" onclick="uploader_remove_item_{*$name*}(this)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1637806989939" fill="#727ccc" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="33774" width="15" height="15"><path d="M512.001 15.678C237.414 15.678 14.82 238.273 14.82 512.86S237.414 1010.04 512 1010.04s497.18-222.593 497.18-497.18S786.589 15.678 512.002 15.678z m213.211 645.937c17.798 17.803 17.798 46.657 0 64.456-17.798 17.797-46.658 17.797-64.456 0L512.001 577.315 363.241 726.07c-17.799 17.797-46.652 17.797-64.45 0-17.804-17.799-17.804-46.653 0-64.456L447.545 512.86 298.79 364.104c-17.803-17.798-17.803-46.657 0-64.455 17.799-17.798 46.652-17.798 64.45 0l148.761 148.755 148.755-148.755c17.798-17.798 46.658-17.798 64.456 0 17.798 17.798 17.798 46.657 0 64.455L576.456 512.86l148.756 148.755z m0 0" p-id="33775"/></svg>
+                                                </span>
+                        </div>
+
+                        <div class="file-name text-left">
+                            <a href="%%href%%">%%filename%%</a>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                                 role="progressbar"
+                                 style="width: 0%"
+                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </li>
+    </script>
+
+</div>
+
+<script>
+    let uploader_count_{*$name*} = 0;
+    let uploader_count_max_{*$name*} = {*$maxFile*};
+    function uploader_remove_item_{*$name*}(self) {
+        $(self).closest('.media').remove();
+        uploader_count_{*$name*}-=1;
+        if(uploader_count_{*$name*} == 0) {
+            $('#drag-and-drop-zone-{*$name*}').find('.none-file').show();
+            $('#drag-and-drop-zone-{*$name*}').find('.with-file').hide();
+        }
+    }
+
+
+    $(function(){
+
+        //mutiple
+        // Creates a new file and add it to our list
+        function ui_multi_add_file_{*$name*}(id, file, href='#')
+        {
+            $('#drag-and-drop-zone-{*$name*}').find('.none-file').hide();
+            $('#drag-and-drop-zone-{*$name*}').find('.with-file').show();
+            var template = $('#files-template-{*$name*}').text();
+            template = template.replace('%%filename%%', file.name);
+            template = template.replace('%%href%%', href);
+            template = $(template);
+            template.prop('id', 'uploaderFile' + id + "{*$name*}");
+            template.data('file-id', id);
+
+            {*if $maxFile == 1*} $('#files-{*$name*}').find('.with-file').html('');{*/if*}
+            $('#files-{*$name*}').find('li.empty').fadeOut(); // remove the 'no files yet'
+            $('#files-{*$name*}').find('.with-file').append(template);
+        }
+
+// Changes the status messages on our list
+        function ui_multi_update_file_status_{*$name*}(id, status, message)
+        {
+            $('#uploaderFile' + id + "{*$name*}").find('span').first().html(message).prop('class', 'flex-fill text-left status text-' + status);
+        }
+
+// Updates a file progress, depending on the parameters it may animate it or change the color.
+        function ui_multi_update_file_progress_{*$name*}(id, percent, color, active, file_ext)
+        {
+            color = (typeof color === 'undefined' ? false : color);
+            active = (typeof active === 'undefined' ? true : active);
+            file_ext = (typeof file_ext === 'undefined' ? 'none' : file_ext);
+
+            let svg_show = false;
+            switch (file_ext) {
+                case "none":
+                    break;
+                case "doc": case "docx":
+                    svg_show = `
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 500 500">
+
+<defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <image id="矢量智能对象_拷贝_30" data-name="矢量智能对象 拷贝 30" x="64" y="39" width="392" height="423" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYgAAAGnCAMAAACaZzD3AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACKFBMVEW32fv///+32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fu32fsAAACWF8/tAAAAtnRSTlMAABI8XHqTpbHAnAY/e7TluAoWZLX1wQ8HWLf9yRUZhOrTHpj43BGM5CQBY+zrLcPvN2f08kINqPZMItX6VjvtYUttToiXKO6jAw7YrrBrAsZpkB33lBTeRZ0EPobHCPkzXaS/5vCvucLKGh8l801XYm7gz7qbfHlT6K10LN19vWBU33cL5+LWzkP+OaCVEAxA+ziAdbLR4dvjHCHIE5poL8wqf77QR1BG/EEbeBi8cSOn0jplcr5yRokAAAABYktHRLfdADtnAAAACXBIWXMAAAuIAAALiAHljilJAAAAB3RJTUUH5QseEDcE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"/>
+  <image id="矢量智能对象_拷贝_36" data-name="矢量智能对象 拷贝 36" x="338" y="40" width="113" height="113" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHEAAABxCAMAAADVoLziAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhFBMVEWBs/////+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/+Bs/8AAADJYoZuAAAAKnRSTlMAAJcBioj659S4mHFFFNqfWf29aBH4pTnGSMg+rR3zbrwb60R0mQMGsqanEROYAAAAAWJLR0QrJLnkCAAAAAlwSFlzAAALiAAAC4gB5Y4pSQAAAAd0SU1FB+ULHhA3BMYH9nEAAAIdSURBVGjevdiJVgIxDAXQVFR2QXDfEFFQ/v8D7QzbzNBOl7ykP3BPT5vmpXTRIdVlaKtMWlGZLERdshRVyZ2oSe5FRfIg6pFHUY08iVpkRVQiq6IOWRNVyLqoQTZEBbIpypNnojh5LkqTDlGYdImypFMUJd2iJOkRBUmfKEd6RTHSL0qRLaIQ2SbKkK2iCNkuSpABUYAMiXgyKMLJsIgmI0QwGSNiySgRSsaJSDJSBJKxIo6MFmFkvIgiE0QQmSJiyCRxe6kubq/URQCZKvLJZJFNpotcMkNkkjkij8wSWWSeyCEzRQaZK+aT2WI2mS/mkgwxk+SIeSRLzCJ5Yg7JFDNIrphOssVkki+mkgAxkUSIaSRETCINXSuThroIMYE01IOI8aShPkaMJg0NQGIsaWiIEiNJQyOYGEcaGuPEKNIQ3eiSVpwAxQjSilOkGCatOL5VJa1IM6gYIgtxjhUDZCHe3WuShUgPYLGVLMVHtNhGliI9KZI78Rku+smdSC965F58xYs+ci/Smxp5EN8/tMiDSAsB0Ukexc6nEnkUafmlQ55EWmG7lo+siPQtIZ6RVZF+NMiauJaoyiZZE2nzK0/WRdrI77Ih0lr8LJuivbHCRXIu0kr2KXCItBR98FwidRaCncQp2uYl1y89ok0FL0KkV7RxSybhtYg2x/4JpPVW0Q4I8xl68gqIdo2nE+gUHRZLdTQc9HtdzIfaPxsBx6E6pk5pAAAAAElFTkSuQmCC"/>
+  <path id="W" class="cls-1" d="M193.943,342.934h44.881l19.527-78.428,19.016,78.428h45.6l35.067-138.8H321.226l-20.345,73.514-19.629-73.113H234.939l-17.891,74.116-19.016-74.116H160.818Z"/>
+</svg>
+`;
+                    break;
+                case "xls": case "xlsx":
+                    svg_show = `
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="组_4" data-name="组 4" width="50" height="50" viewBox="0 0 500 500">
+
+<defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <image id="矢量智能对象_拷贝_33" data-name="矢量智能对象 拷贝 33" x="59" y="33" width="389" height="431" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYUAAAGvCAMAAACDyjkqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACEFBMVEW65qz///+65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qy65qwAAAADW5sOAAAArnRSTlMAABtDYoGXqbPAkQMKSYS876Uabb75qAZd/rIch+0IHpj6Doj3WunID7jJVc4V0xTD1CXcLusgNfHkJC3n1QHuN3w6/EAM3vZCR/1OxlBXWwRfaUVzrngW+3+KoKTaEz+2javYEOjw2Sov9U2Qmhjj5jtkb3qVCc/l1sGjooaDzMKPSD4FrViUiyG3rDG9sOxoXkt2qsS7ysULpgcCUkojvx30cCLNQR9+KERWcYB+M2jJAAAAAWJLR0SvzmyjMQAAAAlwSFlzAAALiAAAC4gB5Y4pSQAAAAd0SU1FB+ULHhA6AprKLQkAAAhGSURBVHja7dvpd1XlFYDxN+BMxCmKooIx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"/>
+  <image id="矢量智能对象_拷贝_34" data-name="矢量智能对象 拷贝 34" x="329" y="34" width="113" height="113" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHEAAABxCAMAAADVoLziAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhFBMVEVuxXn///9uxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXluxXkAAADaxeUKAAAAKnRSTlMAAJcBioj659S4mHFFFNqfWf29aBH4pTnGSMg+rR3zbrwb60R0mQMGsqanEROYAAAAAWJLR0QrJLnkCAAAAAlwSFlzAAALiAAAC4gB5Y4pSQAAAAd0SU1FB+ULHhA6AprKLQkAAAIdSURBVGjevdiJVgIxDAXQVFR2QXDfEFFQ/v8D7QzbzNBOl7ykP3BPT5vmpXTRIdVlaKtMWlGZLERdshRVyZ2oSe5FRfIg6pFHUY08iVpkRVQiq6IOWRNVyLqoQTZEBbIpypNnojh5LkqTDlGYdImypFMUJd2iJOkRBUmfKEd6RTHSL0qRLaIQ2SbKkK2iCNkuSpABUYAMiXgyKMLJsIgmI0QwGSNiySgRSsaJSDJSBJKxIo6MFmFkvIgiE0QQmSJiyCRxe6kubq/URQCZKvLJZJFNpotcMkNkkjkij8wSWWSeyCEzRQaZK+aT2WI2mS/mkgwxk+SIeSRLzCJ5Yg7JFDNIrphOssVkki+mkgAxkUSIaSRETCINXSuThroIMYE01IOI8aShPkaMJg0NQGIsaWiIEiNJQyOYGEcaGuPEKNIQ3eiSVpwAxQjSilOkGCatOL5VJa1IM6gYIgtxjhUDZCHe3WuShUgPYLGVLMVHtNhGliI9KZI78Rku+smdSC965F58xYs+ci/Smxp5EN8/tMiDSAsB0Ukexc6nEnkUafmlQ55EWmG7lo+siPQtIZ6RVZF+NMiauJaoyiZZE2nzK0/WRdrI77Ih0lr8LJuivbHCRXIu0kr2KXCItBR98FwidRaCncQp2uYl1y89ok0FL0KkV7RxSybhtYg2x/4JpPVW0Q4I8xl68gqIdo2nE+gUHRZLdTQc9HtdzIfaPxsBx6E6pk5pAAAAAElFTkSuQmCC"/>
+  <path id="S" class="cls-1" d="M327.5,247.415l-0.754-18.438a39.9,39.9,0,0,0-1.454-9.381,22.867,22.867,0,0,0-4.253-8.026,24.659,24.659,0,0,0-7.16-6.073q-4.148-2.331-12.06-3.634a97.794,97.794,0,0,0-15.882-1.3H232.314a200.963,200.963,0,0,0-22.073,1.3q-11.738,1.3-18.9,5.532a22.342,22.342,0,0,0-9.96,11.984,43.015,43.015,0,0,0-2.8,14.587v21.041a56,56,0,0,0,1.884,15.292,31.865,31.865,0,0,0,5.6,11.279,21.967,21.967,0,0,0,9.475,6.887,30.607,30.607,0,0,0,10.606,2.278q4.845,0.055,18.413.054h55.453q5.382,0,7.7,3.242a16.264,16.264,0,0,1,2.853,7.563q1.075,10.158-2.315,13.562a13.685,13.685,0,0,1-7.914,4.052,93.621,93.621,0,0,1-13.352.539h-35.1a10.869,10.869,0,0,1-4.523-.922,12.331,12.331,0,0,1-3.715-2.6,9.813,9.813,0,0,1-2.422-4.447,27.719,27.719,0,0,1-.431-8.3l-41.24.109-0.107,10.737a58.946,58.946,0,0,0,1.345,13.774,22.867,22.867,0,0,0,10.337,15.563q3.069,1.9,11.252,4.23t24.551,2.332h66.435q12.813,0,19.436-2.711t9.8-5.857a31.989,31.989,0,0,0,5.869-8.568q2.69-5.423,3.661-18.763a136.433,136.433,0,0,0-.377-24.077q-1.239-11.062-5.815-17.516a25.311,25.311,0,0,0-11.79-9.219q-7.215-2.764-18.305-3.2t-16.69-.434H244.805q-11.523,0-14.806-.325a11.733,11.733,0,0,1-6.137-2.549q-2.855-2.221-4.253-7.754-2.37-8.46.269-11.931a14.072,14.072,0,0,1,5.653-4.717q3.013-1.246,12.49-1.248h26.6q8.076,0,12.275,1.464a12.3,12.3,0,0,1,5.922,3.742,11.065,11.065,0,0,1,2.154,4.989q0.429,2.712.754,5.857H327.5Z"/>
+</svg>
+                    `;
+                    break;
+                case "pdf":
+                    svg_show = `
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="组_3" data-name="组 3" width="50" height="50" viewBox="0 0 500 500">
+
+<defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <image id="矢量智能对象_拷贝_33" data-name="矢量智能对象 拷贝 33" x="54" y="34" width="392" height="433" xlink:href="data:img/png;base64,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"/>
+  <image id="矢量智能对象_拷贝_34" data-name="矢量智能对象 拷贝 34" x="327" y="36" width="113" height="113" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHEAAABxCAMAAADVoLziAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhFBMVEX4SGX////4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGX4SGUAAAAv7Ur1AAAAKnRSTlMAAJcBioj659S4mHFFFNqfWf29aBH4pTnGSMg+rR3zbrwb60R0mQMGsqanEROYAAAAAWJLR0QrJLnkCAAAAAlwSFlzAAALiAAAC4gB5Y4pSQAAAAd0SU1FB+ULHhA4NolIuz4AAAIdSURBVGjevdiJVgIxDAXQVFR2QXDfEFFQ/v8D7QzbzNBOl7ykP3BPT5vmpXTRIdVlaKtMWlGZLERdshRVyZ2oSe5FRfIg6pFHUY08iVpkRVQiq6IOWRNVyLqoQTZEBbIpypNnojh5LkqTDlGYdImypFMUJd2iJOkRBUmfKEd6RTHSL0qRLaIQ2SbKkK2iCNkuSpABUYAMiXgyKMLJsIgmI0QwGSNiySgRSsaJSDJSBJKxIo6MFmFkvIgiE0QQmSJiyCRxe6kubq/URQCZKvLJZJFNpotcMkNkkjkij8wSWWSeyCEzRQaZK+aT2WI2mS/mkgwxk+SIeSRLzCJ5Yg7JFDNIrphOssVkki+mkgAxkUSIaSRETCINXSuThroIMYE01IOI8aShPkaMJg0NQGIsaWiIEiNJQyOYGEcaGuPEKNIQ3eiSVpwAxQjSilOkGCatOL5VJa1IM6gYIgtxjhUDZCHe3WuShUgPYLGVLMVHtNhGliI9KZI78Rku+smdSC965F58xYs+ci/Smxp5EN8/tMiDSAsB0Ukexc6nEnkUafmlQ55EWmG7lo+siPQtIZ6RVZF+NMiauJaoyiZZE2nzK0/WRdrI77Ih0lr8LJuivbHCRXIu0kr2KXCItBR98FwidRaCncQp2uYl1y89ok0FL0KkV7RxSybhtYg2x/4JpPVW0Q4I8xl68gqIdo2nE+gUHRZLdTQc9HtdzIfaPxsBx6E6pk5pAAAAAElFTkSuQmCC"/>
+  <path id="P" class="cls-1" d="M182.007,374.049l38.545-12.441v-34.73h61.857q9.713,0.13,15.541-1.618a24.084,24.084,0,0,0,10.735-7.055q4.908-5.308,7.822-15.6t3.323-30.36q0.2-13.463-.051-26.087a144.7,144.7,0,0,0-1.636-20.714,55.3,55.3,0,0,0-4.55-14.695,33.832,33.832,0,0,0-10.429-12.1q-7.26-5.5-21.062-5.5H182.007v180.91ZM266.766,235q8.076,0,11.349,5.9T281.8,259.1q0.406,14.646-3.017,20.281t-12.013,5.637H220.552V235h46.214Z"/>
+</svg>
+                    `;
+                    break;
+
+
+            }
+
+            if(svg_show){
+                $('#uploaderFile' + id +"{*$name*}").find('.svg-box').html(svg_show);
+            }
+            var bar = $('#uploaderFile' + id +"{*$name*}").find('div.progress-bar');
+
+            bar.width(percent + '%').attr('aria-valuenow', percent);
+            bar.toggleClass('progress-bar-striped progress-bar-animated', active);
+
+            if (percent === 0){
+                bar.html('');
+            } else {
+                bar.html(percent + '%');
+                if(percent === 100)
+                {
+                    setTimeout(function(){ $('#uploaderFile' + id +"{*$name*}").find('div.progress').remove(); }, 1000)
+                }
+            }
+
+            if (color !== false){
+                bar.removeClass('bg-success bg-info bg-warning bg-danger');
+                bar.addClass('bg-' + color);
+            }
+        }
+
+        function ui_add_log_{*$name*}(msg){
+            alert(msg);
+        }
+// Toggles the disabled status of Star/Cancel buttons on one particual file
+        function ui_multi_update_file_controls_{*$name*}(id, start, cancel, wasError)
+        {
+            wasError = (typeof wasError === 'undefined' ? false : wasError);
+
+            $('#uploaderFile' + id).find('button.start').prop('disabled', !start);
+            $('#uploaderFile' + id).find('button.cancel').prop('disabled', !cancel);
+
+            if (!start && !cancel) {
+                $('#uploaderFile' + id).find('.controls').fadeOut();
+            } else {
+                $('#uploaderFile' + id).find('.controls').fadeIn();
+            }
+
+            if (wasError) {
+                $('#uploaderFile' + id).find('button.start').html('Retry');
+            }
+        }
+
+
+
+        $(function(){
+            /*
+             * For the sake keeping the code clean and the examples simple this file
+             * contains only the plugin configuration & callbacks.
+             *
+             * UI functions ui_* can be located in:
+             *   - assets/demo/uploader/js/ui-main.js
+             *   - assets/demo/uploader/js/ui-multiple.js
+             *   - assets/demo/uploader/js/ui-single.js
+             */
+            $('#drag-and-drop-zone-{*$name*}').dmUploader({ //
+                url: '{*$url*}',
+                maxFileSize: {*$maxFileSize*}, // Megs
+                fieldName:'{*$fieldName*}',
+                extFilter: {*$extFilter*},
+            {*if $maxFile == 1*}multiple: false,{*/if*}
+                onDragEnter: function(){
+                    // Happens when dragging something over the DnD area
+                    this.addClass('active');
+                },
+                onDragLeave: function(){
+                    // Happens when dragging something OUT of the DnD area
+                    this.removeClass('active');
+                },
+                onInit: function(){
+
+                },
+                onComplete: function(){
+                    uploader_count_{*$name*}=$('#files-{*$name*}').find('.media').length;
+                    console.log(uploader_count_{*$name*})
+                },
+                onNewFile: function(id, file){
+                    {*if $maxFile > 1*}
+                    if(uploader_count_{*$name*} >= uploader_count_max_{*$name*}){
+                        ui_add_log_{*$name*}('上传文件数量已达上限');
+                        return;
+                    }
+                    {*/if*}
+                    ui_multi_add_file_{*$name*}(id, file);
+                },
+                onBeforeUpload: function(id){
+                    ui_multi_update_file_progress_{*$name*}(id, 0, '', true);
+                    ui_multi_update_file_status_{*$name*}(id, 'uploading', '上传中...');
+                },
+                onUploadProgress: function(id, percent){
+                    // Updating file progress
+                    ui_multi_update_file_progress_{*$name*}(id, percent);
+                },
+                onUploadSuccess: function(id, data){
+                    /*                    console.log(JSON.parse(data));*/
+                    data = JSON.parse(data);
+                    $('#uploaderFile'+id+"{*$name*}").append(`<input type="hidden" name="{*$name*}[]" value='${JSON.stringify(data.data)}'>`)
+                    ui_multi_update_file_status_{*$name*}(id, 'success', '上传成功');
+                    ui_multi_update_file_progress_{*$name*}(id, 100, 'success', false, data.data.file_ext);
+                },
+                onUploadError: function(id, xhr, status, message){
+                    // Happens when an upload error happens
+                    ui_multi_update_file_status_{*$name*}(id, 'danger', '传输错误，请检查该文件内容');
+                    ui_multi_update_file_progress_{*$name*}(id, 100, 'danger', false);
+                },
+                onFallbackMode: function(){
+                    // When the browser doesn't support this plugin :(
+                    ui_add_log_{*$name*}('您使用的浏览器存在安全隐患，为了您的文件安全，请更换浏览器', 'danger');
+                },
+                onFileSizeError: function(file){
+                    ui_add_log_{*$name*}('文件 \'' + file.name + '\' 大小超过了上传标准', 'danger');
+                },
+                onFileExtError:function(file){
+                    ui_add_log_{*$name*}('文件 \'' + file.name+"的文件类型不被支持");
+                }
+            });
+            {*foreach from=$value item=item key=key*}
+
+            ui_multi_add_file_{*$name*}({*$item->id*}, {'name':'{*$item->file_name*}'},'{*$item->href*}');
+            setTimeout(function(){                    ui_multi_update_file_status_{*$name*}({*$item->id*}, 'success', '已上传');
+                ui_multi_update_file_progress_{*$name*}({*$item->id*}, 100, 'success', false, '{*$item->file_ext*}');            $('#uploaderFile'+{*$item->id*}+"{*$name*}").append(`<input type="hidden" name="{*$name*}_ids[]" value='{*$item->id*}'>`);}, 100);
+            {*/foreach*}
+        });
+    });
+</script>

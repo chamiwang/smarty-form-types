@@ -1,0 +1,25 @@
+.jx-upload-box{
+    border: 3px dashed white;
+    border-radius: 20px;
+}
+
+.jx-btn{
+    background: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 #b3bfdd;
+    color: #727ccc;
+    border:0
+}
+.jx-btn-m{
+    background: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 0 #b3bfdd;
+    color: #727ccc;
+    border:0
+}
+.btn-group-vertical .jx-btn{
+    margin:10px;
+}
+.jx-btn i{
+    padding-right: 5px;
+}

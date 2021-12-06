@@ -1,0 +1,14 @@
+
+<div class="form-group row">
+    <label for="input-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+    <div id="input-{*$name*}" class="{*if $row*}{*$row[2]*}{*/if*} mt-1">
+        <div class="form-check form-check-inline">
+            {*foreach $list as $key=>$item*}
+            <input {*if $value == $key *}checked{*/if*} class="mr-1 form-check-input" type="radio" name="{*$name*}" id="inlineRadio-{*$key*}-{*$name*}" value="{*$key*}">
+            <label class="mr-4 form-check-label" for="inlineRadio-{*$key*}-{*$name*}">{*$item*}</label>
+            {*/foreach*}
+
+        </div>
+
+    </div>
+</div>
