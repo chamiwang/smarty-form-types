@@ -1,4 +1,4 @@
-<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-sm-12 col-md-4{*/if*} {*if $row*}row{*/if*}">
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-6{*/if*}">
     <label for="input-{*$name*}">{*$title*}</label>
-    <textarea name="{*$name*}" class="form-control" id="input-{*$name*}" rows="3" >{*$value*}</textarea>
+    <textarea name="{*$name*}" class="form-control" id="input-{*$name*}" rows="{*if $rows*}{*$rows*}{*else*}3{*/if*}" >{*$value*}</textarea>
 </div>

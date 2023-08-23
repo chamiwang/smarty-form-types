@@ -1,9 +1,9 @@
-<!--bootstrap-datepicker-->
+
 {*if $vertical*}
 <div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*}">
     <label class="col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
     <div class="input-group input-daterange-{*$name1*}">
-        <input name="{*$name1*}" type="text" class="form-control" value="{*$value1*}"
+        <input autocomplete="off"  name="{*$name1*}" type="text" class="form-control" value="{*$value1*}"
                {*if $required *} data-required ="true" {*/if*}
         data-describedby="{*$name1*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
@@ -19,7 +19,7 @@
     </div>
     <div class="input-group-addon align-text-bottom p-2">到</div>
     <div class="input-group input-daterange-{*$name1*}">
-        <input name="{*$name2*}" type="text" class="form-control" value="{*$value2*}"
+        <input autocomplete="off"  name="{*$name2*}" type="text" class="form-control" value="{*$value2*}"
                {*if $required2 *} data-required ="true" {*/if*}
         data-describedby="{*$name2*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
@@ -31,7 +31,7 @@
 <div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*}">
     <label class="col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
     <div class="input-group input-daterange-{*$name1*}">
-        <input name="{*$name1*}" type="text" class="form-control" value="{*$value1*}"
+        <input autocomplete="off" name="{*$name1*}" type="text" class="form-control" value="{*$value1*}"
                {*if $required *} data-required ="true" {*/if*}
         data-describedby="{*$name1*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
@@ -41,7 +41,7 @@
                 </div>-->
         <div class="input-group-addon p-2">到</div>
 
-        <input name="{*$name2*}" type="text" class="form-control" value="{*$value2*}"
+        <input autocomplete="off" name="{*$name2*}" type="text" class="form-control" value="{*$value2*}"
                {*if $required2 *} data-required ="true" {*/if*}
         data-describedby="{*$name2*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="default"{*/if*}
@@ -60,6 +60,7 @@
                 readOnly: true,
                 clearData: true,
                 format: 'yyyy-mm-dd',
+                orientation:'bottom auto',
             {*if $startDate*}startDate: '{*$startDate*}',{*/if*}
                 language:'zh-CN',
             });

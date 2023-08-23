@@ -17,7 +17,15 @@
 
         </div>
         <div class="form-group">
-            <a target="_blank" href="/com/paper/user/sample?token={*$aXsrf*}" class="btn btn-success btn-large"  aria-label="Mute">
+
+            {*if $aTurtlePower*}
+            <a target="_blank" href="{*$example*}Reset" class="btn btn-danger btn-large"  aria-label="Mute">
+                <!-- alt="..." on <img> element -->
+                <img src="/app/static/bootstrap/4.6.0/icons/recycle.svg" alt="Bootstrap" >
+                清除模板缓存
+            </a>
+            {*/if*}
+            <a target="_blank" href="{*$example*}?token={*$aXsrf*}" class="btn btn-success btn-large"  aria-label="Mute">
                 <!-- alt="..." on <img> element -->
                 <img src="/app/static/bootstrap/4.6.0/icons/download.svg" alt="Bootstrap" >
                 示例模板下载

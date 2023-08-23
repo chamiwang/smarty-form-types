@@ -1,0 +1,64 @@
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} " >
+    <label for="select-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+
+    <div v-for="part,index in honor_list" class="{*if $row*}row{*/if*} pb-2">
+        <div class="col-11 pt-2 "><span class="pl-3">第{{ index+1 }}项:</span> </div>
+        <div class="col-1 pt-2"><span class="pt-2 select-vue-close-btn" @click="removeHonorTitle(index)" v-if="honor_list.length >1"><i class="pl-5 ion-close-circled"></i></span></div>
+        <div class="col-6">
+            <el-select @change="getSecondHonorList(part)"  v-model="part.first_level" :name="`{*$name*}[${index}][]`" id="select-{*$name*}" class="custom-select" filterable
+                       {*if $required == true*}data-required ="true" {*/if*}
+            data-describedby="{*$name*}-error"
+            {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}
+            >
+
+
+            <el-option value="">请选择...</el-option>
+
+            <el-option v-for="item,index in part.first_level_list"
+
+                       :key="item"
+                       :label="item.label"
+                       :value="item"
+            >
+            </el-option>
+
+
+
+            <div id="{*$name*}-error" class="invalid-feedback" >
+
+            </div>
+        </div>
+
+        <div class="col-6 province-input" v-if="part.first_level == '省部级'">
+            <el-input :name="`{*$name*}[${index}][]`" v-model="part.second_level"></el-input>
+        </div>
+        <div class="col-6" v-if="part.first_level == '国家级'" :name="`{*$name*}[${index}][]`">
+            <el-select   v-model="part.second_level" :name="`{*$name*}[${index}][]`"  class="custom-select" filterable
+                       {*if $required == true*}data-required ="true" {*/if*}
+            data-describedby="{*$name*}-error"
+            {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}
+            >
+
+
+            <el-option value="">请选择...</el-option>
+
+            <el-option v-for="item,index in part.second_level_list"
+
+                       :key="item"
+                       :label="item.label"
+                       :value="item"
+            >
+            </el-option>
+
+
+
+            <!--        <div id="{*$name*}-error" class="invalid-feedback" >
+
+                    </div>-->
+        </div>
+    </div>
+    <div class="d-flex justify-content-center bd-highlight m-3">
+        <a v-if="honor_list.length <=8" class="btn btn-success" @click="createHonorTitle()">添加一项</a>
+    </div>
+</div>
+

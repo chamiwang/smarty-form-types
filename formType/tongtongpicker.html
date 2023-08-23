@@ -1,0 +1,60 @@
+<style>
+    .pop-490{ width:450px; height:auto; padding:10px 20px 15px; left:5px; background:#FFF;z-index:3000}
+    .pop-490 em{ float:right; display:block;  margin-right:-5px}
+
+    /*07.07 上线修改begin*/
+    /* .pop-490 b{ float:right; width:40px; height:20px; margin-bottom:-10px;display:block; text-align:right; margin-right:-10px}
+    .pop-490 b a{ display:block; width:40px; height:20px;} */
+    /*07.07 上线修改end*/
+
+    .pop-490 h2{ font-size:16px; border-bottom:1px solid #2752B1; color:#333; padding-bottom:8px; font-weight:normal; margin-bottom:15px;}
+    .pop-490 h3{ font-size:16px; color:#333; padding-bottom:5px; font-weight:normal; margin-bottom:10px;}
+    .pop-490 h3 i{ font-size:12px;color:#666; padding-left:10px; padding-top:5px;}
+    .pop-490 .h-80{height:55px!important;overflow:auto;padding:15px 10px 0;margin-bottom:5px;color:#666;border:1px solid #E7E7E7;}
+    .pop-490 .h-80 span{ float:left;margin-right:11px; margin-bottom:15px;}
+    .pop-490 .h-80 i{ color:#999; margin-right:5px;}
+    .pop-490 .txt{ font-size:12px; color:#666}
+    .pop-490 .txt ul{}
+    .pop-490 .txt li{ width:150px; float:left;margin-bottom:10px;}
+    .pop-490 .txt p{ margin-bottom:10px;}
+    .p-35{ top:35px;}
+    .p-35 span{ margin-right:11px; float:left;}
+    .p-50{ top:447px; left:433px;}
+    .p-310{ left:392px; top:70px;}
+    .p-200{ left:360px; top:5px;}
+    /* .p-360{ left:360px; top:50px;} */
+    /*07.07 上线修改 */
+    .p-360{ left:340px; top:85px;}
+    /*添加模糊搜素样式20150826*/
+    .fuzzy{margin:10px 0 25px;}
+    .fuzzy .fuz-search{height:26px; border:1px solid #f90;}
+    .fuzzy .fuz-tit{float:left; width:124px; height:26px; background:#f90; line-height:26px; text-align:center; color:#fff;}
+    .fuzzy .fuz-ipt{float:left; height:26px; width:252px;}
+    .fuzzy .fuz-ipt input{padding:0 5px; width:242px; height:26px; line-height:26px; background:none; border:none; color:#666;}
+    .fuzzy .fuz-btn{float:right; width:50px; height:26px; padding-left:22px; background:url(../images/sou.jpg) no-repeat 12px center #f90; line-height:26px; color:#fff; text-align:center;}
+
+    .fuzzy .fuz-result{padding:10px 12px; border:1px solid #f90; border-top:none; display:none;}
+    .fuzzy .fuz-result .fuz-major{display:inline-block; *zoom:1; *display:inline; height:25px; padding:0 15px; margin:5px 3px; border:1px solid #f90; border-radius:25px; text-align:center; line-height:25px; color:#666;}
+    .fuzzy .fuz-result .fuz-major:hover{background:#f90; color:#fff;}
+    .fuzzy .fuz-result .fuz-major.cur{background:#f90; color:#fff;}
+    .fuzzy .fuz-result p{color:#999;}
+    /*修改简历，注册2,学科领域三级联动样式*/
+    .input-220-2 em{float:none;}
+    .input-220-2 img{margin:0 3px 0 5px;}
+    .input-175{ width:175px; margin:0;}
+    /*修改简历，注册2,学科领域三级联动样式*/
+    .tj-r{ left:930px; top:50px;}
+</style>
+<tr>
+    <td width="500" height="40" align="right"><font>*</font>二级学科</td>
+    <td width="20"></td>
+    <td width="740" align="left" class="pos-r">
+        <span class="btn-add btn-bg btn-p wihte left" style="margin-left: 20px;"><a class="a_hover" href="javascript:void(0)" style="text-align: center;" onclick="$(this).parent().next().fieldLayer({layer:3,name:'afieldlist',type:'choose',right:'200px',is_resume:1});">&nbsp;&nbsp;&nbsp;&nbsp;选择&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
+        <div id="fieldhome" class="w-390 left mar-l-20 hide" style="display: block;">
+            {*foreach from=$aResumeInfo.subfield_real item=item key=key*}
+            <em title="{*$item*}">{*$item*}<a onclick="$(this).stopEve();return false;" href="javascript:void(0)">
+                <img width="8" height="8" src="/app/static/images/close-red.jpg"></a><input type="hidden" value="{*$key*}" title="{*$item*}" name="afieldlist[]" ></em>
+            {*/foreach *}
+        </div>
+    </td>
+</tr>

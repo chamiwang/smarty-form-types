@@ -1,0 +1,9 @@
+let {*$name*}_multi_length = $('#files-{*$name*}_file').find('.media').length;
+if({*$name*}_multi_length == 0) {
+valid = false;
+$('#{*$name*}_file-error').show()
+let t = $('#{*$name*}_file-error').offset().top;
+$(window).scrollTop(t-{*$scroll*});
+}
+else{$('#{*$name*}_file-error').hide()}
+

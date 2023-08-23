@@ -1,8 +1,8 @@
-<!--bootstrap-datepicker-->
+
 <div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} {*if $row*}row{*/if*}">
     <label class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}</label>
     <div class="{*if $row*}{*$row[2]*}{*/if*}">
-        <input id="input-date-{*$name*}" name="{*$name*}" type="text" class="form-control" value="{*$value*}"
+        <input autocomplete="off"  id="input-date-{*$name*}" name="{*$name*}" type="text" class="form-control" value="{*$value*}"
                {*if $required == true*}data-required ="true" {*/if*}
         data-describedby="{*$name*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}

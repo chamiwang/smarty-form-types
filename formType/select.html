@@ -1,18 +1,30 @@
 <div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} {*if $row*}row{*/if*}">
+    {*block name=label*}
     <label for="select-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
+    {*/block*}
     <div class="{*if $row*}{*$row[2]*}{*/if*}">
         <select name="{*$name*}" id="select-{*$name*}" class="custom-select"
                 {*if $required == true*}data-required ="true" {*/if*}
         data-describedby="{*$name*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}
         >
-     
+
+        //特殊需求
+        {*if $type == array*}
+        <option value="">请选择...</option>
+        {*foreach from=$list item=item key=key*}
+        <option value="{*$key*}" {*if $value== $key*}selected{*/if*}>{*$item.name*}</option>
+        {*if $key eq '3'*}
+        <option value="9" price="1500" {*if $value=="9" *}selected{*/if*}>普通级-纯211高校</option>
+        {*/if*}
+        {*/foreach*}
+        {*else*}
         //常规需求
         <option value="">请选择...</option>
         {*foreach from=$list item=item key=key*}
         <option value="{*$key*}" {*if $value== $key*}selected{*/if*}>{*$item*}</option>
         {*/foreach*}
-
+        {*/if*}
         </select>
 
         <div id="{*$name*}-error" class="invalid-feedback" >

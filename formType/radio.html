@@ -1,5 +1,5 @@
 
-<div class="form-group row">
+<div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-sm-12 col-md-4{*/if*} {*if $row*}row{*/if*}">
     <label for="input-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
     <div id="input-{*$name*}" class="{*if $row*}{*$row[2]*}{*/if*} mt-1">
         <div class="form-check form-check-inline">

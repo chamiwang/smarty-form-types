@@ -1,7 +1,7 @@
 <div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} {*if $row*}row{*/if*}">
     <label for="select-{*$name*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title*}{*if $required == true*}<span class="require-mark">*</span>{*/if*}</label>
-    <div class="{*if $row*}{*$row[2]*}{*/if*} d-flex">
-        <select name="{*$name*}" id="select-{*$name*}" class="flex-fill"
+    <div class="{*if $row*}{*$row[2]*}{*/if*} ">
+        <select name="{*$name*}" id="select-{*$name*}" class="form-control"
                 {*if $required == true*}data-required ="true" {*/if*}
         data-describedby="{*$name*}-error"
         {*if $c_type *} data-description="{*$c_type*}" {*else*}data-description="select"{*/if*}
@@ -9,7 +9,7 @@
 
         <option value="">请选择...</option>
         {*foreach from=$list item=item key=key*}
-        <option value="{*$key*}" {*if $value== $key*}selected{*/if*}>{*$item*}</option>
+        <option value="{*$key*}" {*if $value== $key*}selected{*/if*}>{*$key|truncate:5:' '*}{*$item*}</option>
         {*/foreach*}
         </select>
 
@@ -22,8 +22,8 @@
 
 <div class="form-group {*if $classes*}{*$classes[1]*}{*else*}col-4{*/if*} {*if $row*}row{*/if*}">
     <label for="select-{*$name2*}" class="{*if $row*}{*$row[1]*}{*/if*} col-form-label">{*$title2*}{*if $required2 == true*}<span class="require-mark">*</span>{*/if*}</label>
-    <div class="{*if $row*}{*$row[2]*}{*/if*} d-flex">
-        <select name="{*$name2*}" id="select-{*$name2*}" class="flex-fill"
+    <div class="{*if $row*}{*$row[2]*}{*/if*} ">
+        <select name="{*$name2*}" id="select-{*$name2*}" class="form-control"
                 {*if $required2 == true*}data-required ="true" {*/if*}
         data-describedby="{*$name2*}-error"
         {*if $c_type2 *} data-description="{*$c_type2*}" {*else*}data-description="select"{*/if*}
